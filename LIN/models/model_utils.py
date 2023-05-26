@@ -7,7 +7,7 @@ def get_h(model):
     return h 
 
 @torch.no_grad()
-def update_lagrange(model, ita = 2, delta = 0.9, bd = 1e8): # 1e8
+def update_lagrange(model, ita = 2, delta = 0.99, bd = 1e8): # 0.9 1e8
 
     # check if it is dag
     h = get_h(model)

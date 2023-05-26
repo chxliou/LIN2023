@@ -58,7 +58,7 @@ class LIN_GaussianNet(nn.Module):
 
         self.load_state_dict(torch.load(path))
 
-    def fit(self, data, epoch = 20, lr_net = 1e-2, lr = 1e-2, batch_size = 256, train_sample = 0.8, struct_pnt_coeff = 1e-8, patient = 20, update_patient= 3, tol_rate = 0, aug_vbs_fun = None, itr_per_epoch = 100, cluster_updating_period = 1, ita = 2, sub_pb_pt = 1, verbose_period = 1, dag_check = 0):
+    def fit(self, data, epoch = 20, lr_net = 1e-2, lr = 1e-2, batch_size = 256, train_sample = 0.8, struct_pnt_coeff = 1e-8, patient = 20, update_patient= 3, tol_rate = 0, aug_vbs_fun = None, itr_per_epoch = 100, cluster_updating_period = 1, ita = 2, sub_pb_pt = 1, verbose_period = 1, dag_check = 0, lag_delta = 0.9):
         r'''
         Train the model
         Input:
@@ -137,7 +137,7 @@ class LIN_GaussianNet(nn.Module):
                 if cnt_cache >=  update_patient:
                     cnt_cache = update_patient + 1
                     if is_DAG == 'No':
-                        update_lagrange(self)
+                        update_lagrange(self, delta=lag_delta)
                         pass
                     eval_loss_cache = np.inf          
 

@@ -36,6 +36,7 @@ Usage:
     python Brownian_LIN.py --dim 2 --graphtype BA --log --pnt 1e-4 --E 2
     python Brownian_LIN.py --dim 2 --graphtype BA --log --pnt 1e-4 --E 3
     python Brownian_LIN.py --dim 2 --graphtype BA --log --pnt 1e-4 --E 4
+    python Brownian_LIN.py --dim 2 --graphtype BA --log --pnt 1e-4 --E 5
 '''
 import argparse
 import torch
@@ -138,11 +139,12 @@ fit_args = {
     "struct_pnt_coeff":  (opt.pnt, opt.pnt, 0), 
     "patient": 100,  
     "update_patient": 3, 
-    "tol_rate": 1e-4, 
+    "tol_rate": 0, 
     "aug_vbs_fun":aug_vbs_fun,
-    "itr_per_epoch": 1000,
+    "itr_per_epoch": 100,
     "sub_pb_pt": 1,
     "verbose_period": 10,
+    "lag_delta": 0.99
 }
 
 assert not torch.any(torch.isnan(data))
